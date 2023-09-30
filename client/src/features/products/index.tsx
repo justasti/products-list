@@ -6,7 +6,36 @@ export const Products = () => {
     <div>
       {products &&
         products.map((product: Product) => (
-          <div key={product._id}>{product.productName}</div>
+          <>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+            <div key={product._id + Math.random()}>{product.productName}</div>
+          </>
         ))}
     </div>
   )
