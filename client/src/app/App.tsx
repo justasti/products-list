@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { Products } from '../features/products'
+import { Products } from '../components/products'
 import { Homepage } from '../pages/home'
 
 function App() {

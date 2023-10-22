@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { mealsApi } from '../features/meals/api'
 import { useDispatch } from 'react-redux'
-import { productsApi } from '../features/products/api'
+import { mealsSlice } from './meals/slice'
+import { mealsApi } from './mealsApi/api'
+import { productsSlice } from './products/slice'
+import { productsApi } from './productsApi/api'
 
 export const reduxStore = configureStore({
   reducer: {
+    [mealsSlice.name]: mealsSlice.reducer,
     [mealsApi.reducerPath]: mealsApi.reducer,
+    [productsSlice.name]: productsSlice.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -15,3 +19,8 @@ export const reduxStore = configureStore({
 export type RootState = ReturnType<typeof reduxStore.getState>
 export type AppDispatch = typeof reduxStore.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch
+export interface ThunkApi<T = unknown> {
+  dispatch: AppDispatch
+  state: RootState
+  rejectValue: T
+}
