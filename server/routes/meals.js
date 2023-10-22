@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-// Import model
+// Import models
 const Meal = require('../models/meal');
+const Product = require('../models/product')
 
 // Validation related imports
 const validateSchema = require('../middleware/validate');
@@ -14,13 +15,20 @@ router.post('/', validateSchema(mealValidation), async (req, res) => {
     const mealData = {
       mealName: req.body.mealName,
       products: req.body.products,
-    };
+    }
+    const meal = await Meal.create(mealData)
 
-    const meal = await Meal.create(mealData);
-    res.status(201).json(meal);
+    mealData.products.forEach(async (product) => {
+      const existingProduct = await Product.findOne({
+        productName: product.productName,
+      }).exec()
+
+      if (!existingProduct) await Product.create(product)
+    })
+
+    res.status(201).json(meal)
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Could not create meal' });
+    res.status(500).json({ error: 'Could not create meal' })
   }
 });
 
