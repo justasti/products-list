@@ -1,1 +1,1 @@
-export const productsSliceName = 'productsSlice'
+export const productsSliceName = 'products'

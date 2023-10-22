@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
 import { mealsSlice } from './meals/slice'
 import { mealsApi } from './mealsApi/api'
 import { productsSlice } from './products/slice'
@@ -18,7 +17,6 @@ export const reduxStore = configureStore({
 
 export type RootState = ReturnType<typeof reduxStore.getState>
 export type AppDispatch = typeof reduxStore.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch
 export interface ThunkApi<T = unknown> {
   dispatch: AppDispatch
   state: RootState

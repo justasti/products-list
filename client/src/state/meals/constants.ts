@@ -1,1 +1,1 @@
-export const mealsSliceName = 'mealsSlice'
+export const mealsSliceName = 'meals'
