@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Product, productsApi } from '../productsApi/api'
+import { Product } from '../models'
+import { productsApi } from '../productsApi/api'
 import { ThunkApi } from '../store'
 import { productsSliceName } from './constants'
-
-export interface CreateProductPayload {
-  productName: string
-}
 
 export const getProducts = createAsyncThunk<Product[], void, ThunkApi>(
   `${productsSliceName}/getProducts`,
@@ -21,17 +18,21 @@ export const getProducts = createAsyncThunk<Product[], void, ThunkApi>(
   }
 )
 
-export const createMeal = createAsyncThunk<
-  void,
-  CreateProductPayload,
-  ThunkApi
->(
+export const createProduct = createAsyncThunk<void, Product, ThunkApi>(
   `${productsSliceName}/createProduct`,
-  async (product, { dispatch, rejectWithValue }) => {
+  async (product, { dispatch, rejectWithValue, getState }) => {
     try {
-      await dispatch(
-        productsApi.endpoints.createProduct.initiate(product)
-      ).unwrap()
+      const state = getState()
+      const existingProduct = state.products.products.find(
+        (prod) =>
+          prod.productName.toLocaleLowerCase() ===
+          product.productName.toLocaleLowerCase()
+      )
+      if (!existingProduct) {
+        await dispatch(
+          productsApi.endpoints.createProduct.initiate(product)
+        ).unwrap()
+      }
     } catch (error) {
       return rejectWithValue(error)
     }

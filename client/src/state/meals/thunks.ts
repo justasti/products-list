@@ -1,12 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Meal, MealProduct, mealsApi } from '../mealsApi/api'
+import { mealsApi } from '../mealsApi/api'
+import { Meal } from '../models'
 import { ThunkApi } from '../store'
 import { mealsSliceName } from './constants'
-
-export interface CreateMealPayload {
-  mealName: string
-  products: MealProduct[]
-}
 
 export const getMeals = createAsyncThunk<Meal[], void, ThunkApi>(
   `${mealsSliceName}/getMeals`,
@@ -22,7 +18,7 @@ export const getMeals = createAsyncThunk<Meal[], void, ThunkApi>(
   }
 )
 
-export const createMeal = createAsyncThunk<void, CreateMealPayload, ThunkApi>(
+export const createMeal = createAsyncThunk<void, Meal, ThunkApi>(
   `${mealsSliceName}/createMeal`,
   async (meal, { dispatch, rejectWithValue }) => {
     try {

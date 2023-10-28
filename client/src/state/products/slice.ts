@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Product } from '../productsApi/api'
+import { createMeal } from '../meals/thunks'
+import { Product } from '../models'
 import { productsSliceName } from './constants'
 import { getProducts } from './thunks'
 
@@ -24,6 +25,23 @@ export const productsSlice = createSlice({
       builder.addCase(getProducts.fulfilled, (state, action) => {
         state.products = action.payload
         state.loading = false
+      }),
+      builder.addCase(getProducts.rejected, (state) => {
+        state.loading = false
+      }),
+      builder.addCase(createMeal.fulfilled, (state, action) => {
+        for (const product of action.meta.arg.products) {
+          if (
+            !state.products.find(
+              (prod) => prod.productName === product.productName
+            )
+          ) {
+            state.products.push({
+              productName: product.productName,
+              uniqueId: product.uniqueId,
+            })
+          }
+        }
       })
   },
 })

@@ -2,11 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQuery } from '../baseQuery'
 import { CreateProductPayload } from '../products/thunks'
 
-export type Product = {
-  _id: string
-  productName: string
-}
-
 export const productsApi = createApi({
   baseQuery,
   reducerPath: 'productsApi',
