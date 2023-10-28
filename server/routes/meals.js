@@ -45,7 +45,6 @@ router.post('/', validateSchema(mealValidation), async (req, res) => {
       res.status(201).json(meal)
     }
   } catch (error) {
-    console.log({ error })
     res
       .status(500)
       .json({ error: 'Could not create meal', message: error.message })
