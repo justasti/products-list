@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQuery } from '../baseQuery'
-import { CreateProductPayload } from '../products/thunks'
+import { Product } from '../models'
 
 export const productsApi = createApi({
   baseQuery,
@@ -12,7 +12,7 @@ export const productsApi = createApi({
         method: 'GET',
       }),
     }),
-    createProduct: builder.mutation<void, CreateProductPayload>({
+    createProduct: builder.mutation<void, Product>({
       query: (body) => ({
         url: '/products',
         method: 'POST',
