@@ -15,7 +15,9 @@ export const Meals = () => {
       <div>
         {meals &&
           meals.map((meal: Meal) => (
-            <div key={meal.uniqueId}>{meal.mealName}</div>
+            <div key={meal.uniqueId}>
+              <Link to={meal.uniqueId}>{meal.mealName}</Link>
+            </div>
           ))}
       </div>
       <Link to='/meals/new'>Add new meal</Link>

@@ -43,7 +43,7 @@ export const NewMealForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor='product'>Meal name:</label>
+        <label htmlFor='meal'>Meal name:</label>
         <input
           type='text'
           name='meal'

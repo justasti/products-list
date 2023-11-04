@@ -5,6 +5,7 @@ import { NewMealForm } from '../components/meals/NewMealForm'
 import { Products } from '../components/products'
 import { NewProductForm } from '../components/products/NewProductForm'
 import { Homepage } from '../pages/home'
+import { MealPage } from '../pages/meal/Meal'
 import { useAppDispatch } from '../state/hooks'
 import { getMeals } from '../state/meals/thunks'
 import { getProducts } from '../state/products/thunks'
@@ -45,6 +46,10 @@ const App = () => {
             {
               path: 'new',
               element: <NewMealForm />,
+            },
+            {
+              path: ':uniqueId',
+              element: <MealPage />,
             },
           ],
         },

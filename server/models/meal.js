@@ -15,6 +15,12 @@ const mealSchema = new mongoose.Schema({
   },
   products: [
     {
+      uniqueId: {
+        type: String,
+        required: true,
+        default: () => nanoid(),
+        index: { unique: true },
+      },
       productName: { type: String, ref: productSchema },
       productAmount: Number,
     },

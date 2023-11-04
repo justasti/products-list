@@ -64,11 +64,11 @@ router.get('/', async (_req, res) => {
 // Read a single meal by ID
 router.get('/:id', async (req, res) => {
   try {
-    const product = await Meal.findById(req.params.id)
-    if (!product) {
+    const meal = await Meal.findOne({ uniqueId: req.params.id })
+    if (!meal) {
       return res.status(404).json({ error: 'Meal not found' })
     }
-    res.status(200).json(product)
+    res.status(200).json(meal)
   } catch (error) {
     res.status(500).json({ error: 'Could not fetch meal' })
   }
