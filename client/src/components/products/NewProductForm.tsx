@@ -16,8 +16,10 @@ export const NewProductForm = () => {
       uniqueId: nanoid(),
     }
     try {
-      await dispatch(createProduct(newProduct))
-      productInputRef.current.value = null
+      const res = await dispatch(createProduct(newProduct))
+      if (res.meta.requestStatus !== 'rejected') {
+        productInputRef.current.value = null
+      }
     } finally {
       setIsButtonDisabled(false)
     }
