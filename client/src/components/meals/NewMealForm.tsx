@@ -4,11 +4,13 @@ import { useAppDispatch } from '../../state/hooks'
 import { createMeal } from '../../state/meals/thunks'
 import { Meal, MealProduct } from '../../state/models'
 export const NewMealForm = () => {
-  const dispatch = useAppDispatch()
-  const [products, setProducts] = useState<MealProduct[]>([
+  const initialProducts = [
     { productName: '', productAmount: '', uniqueId: nanoid() },
-  ])
+  ]
+  const dispatch = useAppDispatch()
+  const [products, setProducts] = useState<MealProduct[]>(initialProducts)
   const [mealName, setMealName] = useState('')
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
   const handleAddProduct = () => {
     setProducts((prevProducts) => [
@@ -28,16 +30,24 @@ export const NewMealForm = () => {
     setProducts(productsList)
   }
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
+    setIsButtonDisabled(true)
 
     const meal: Meal = {
       uniqueId: nanoid(),
       mealName,
       products,
     }
-
-    dispatch(createMeal(meal))
+    try {
+      const res = await dispatch(createMeal(meal))
+      if (res.meta.requestStatus !== 'rejected') {
+        setProducts(initialProducts)
+        setMealName('')
+      }
+    } finally {
+      setIsButtonDisabled(false)
+    }
   }
 
   return (
@@ -80,7 +90,7 @@ export const NewMealForm = () => {
         </div>
       ))}
       <div>
-        <input type='submit' value='Create' />
+        <input disabled={isButtonDisabled} type='submit' value='Create' />
       </div>
     </form>
   )
