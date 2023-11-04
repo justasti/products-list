@@ -12,8 +12,7 @@ body {
   font-family: 'Roboto', sans-serif;
   min-height: 100dvh;
   position: relative;
-  background-color: #2C3333;
-  color: #CBE4DE;
+  color: #444;
 }
 #root {
   display: flex;

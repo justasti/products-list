@@ -1,19 +1,23 @@
 import { nanoid } from '@reduxjs/toolkit'
 import { SyntheticEvent, useState } from 'react'
-import { useAppDispatch } from '../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { createMeal } from '../../state/meals/thunks'
 import { Meal, MealProduct } from '../../state/models'
+import { selectIsProductsLoading } from '../../state/products/selectors'
+import { getProducts } from '../../state/products/thunks'
 export const NewMealForm = () => {
   const initialProducts = [
     { productName: '', productAmount: '', uniqueId: nanoid() },
   ]
-  const dispatch = useAppDispatch()
-  const [products, setProducts] = useState<MealProduct[]>(initialProducts)
+  const productsLoading = useAppSelector(selectIsProductsLoading)
+  const [mealProducts, setMealProducts] =
+    useState<MealProduct[]>(initialProducts)
   const [mealName, setMealName] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const dispatch = useAppDispatch()
 
   const handleAddProduct = () => {
-    setProducts((prevProducts) => [
+    setMealProducts((prevProducts) => [
       ...prevProducts,
       { productName: '', productAmount: '', uniqueId: nanoid() },
     ])
@@ -25,24 +29,30 @@ export const NewMealForm = () => {
     valueToEdit: 'productName' | 'productAmount'
   ) => {
     const { value } = e.target
-    const productsList = [...products]
+    const productsList = [...mealProducts]
     productsList[i][valueToEdit] = value
-    setProducts(productsList)
+    setMealProducts(productsList)
   }
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
     setIsButtonDisabled(true)
+    dispatch(getProducts())
+
+    while (productsLoading) {
+      await new Promise((resolve) => setTimeout(resolve, 100))
+    }
 
     const meal: Meal = {
       uniqueId: nanoid(),
       mealName,
-      products,
+      products: mealProducts,
     }
+
     try {
       const res = await dispatch(createMeal(meal))
       if (res.meta.requestStatus !== 'rejected') {
-        setProducts(initialProducts)
+        setMealProducts(initialProducts)
         setMealName('')
       }
     } finally {
@@ -62,7 +72,7 @@ export const NewMealForm = () => {
           onChange={(e) => setMealName(e.target.value)}
         />
       </div>
-      {products.map((product, i) => (
+      {mealProducts.map((product, i) => (
         <div key={i}>
           <div>
             <label htmlFor={`productName${i}`}>Product name:</label>
@@ -83,7 +93,7 @@ export const NewMealForm = () => {
               value={product.productAmount}
               onChange={(e) => handleChange(e, i, 'productAmount')}
             />
-            {i === products.length - 1 && (
+            {i === mealProducts.length - 1 && (
               <button onClick={handleAddProduct}>+</button>
             )}
           </div>

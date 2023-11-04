@@ -7,12 +7,12 @@ interface NavProps {
 export const StyledNavbar = styled.nav<NavProps>`
   width: 200px;
   padding: ${(props) => (props.$mobile ? '16px' : '64px 16px')};
-  background-color: #2e4f4f;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
   height: 100dvh;
+  border-right: 1px solid #ccc;
   > ul {
     display: flex;
     flex-direction: column;

@@ -17,7 +17,7 @@ const LoadingSpinnerContainer = styled.div`
 export const LoadingSpinner = () => {
   return (
     <LoadingSpinnerContainer>
-      <BlocksShuffleThree color='#FFFFFFBB' height={60} width={60} />
+      <BlocksShuffleThree color='#000000aa' height={60} width={60} />
       <h3>Loading...</h3>
     </LoadingSpinnerContainer>
   )
