@@ -22,16 +22,17 @@ export const createProduct = createAsyncThunk<void, Product, ThunkApi>(
   `${productsSliceName}/createProduct`,
   async (product, { dispatch, rejectWithValue, getState }) => {
     try {
-      const state = getState()
-      const existingProduct = state.products.products.find(
+      const existingProduct = getState().products.products.find(
         (prod) =>
           prod.productName.toLocaleLowerCase() ===
           product.productName.toLocaleLowerCase()
       )
       if (!existingProduct) {
-        await dispatch(
+        return await dispatch(
           productsApi.endpoints.createProduct.initiate(product)
         ).unwrap()
+      } else {
+        throw 'Product already exists'
       }
     } catch (error) {
       return rejectWithValue(error)

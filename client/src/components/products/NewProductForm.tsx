@@ -1,12 +1,35 @@
+import { nanoid } from '@reduxjs/toolkit'
+import { SyntheticEvent, useRef, useState } from 'react'
+import { useAppDispatch } from '../../state/hooks'
+import { createProduct } from '../../state/products/thunks'
+
 export const NewProductForm = () => {
+  const productInputRef = useRef<HTMLInputElement>(null)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const dispatch = useAppDispatch()
+
+  const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    setIsButtonDisabled(true)
+    const newProduct = {
+      productName: productInputRef.current.value,
+      uniqueId: nanoid(),
+    }
+    try {
+      await dispatch(createProduct(newProduct))
+      productInputRef.current.value = null
+    } finally {
+      setIsButtonDisabled(false)
+    }
+  }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor='product'>Product name:</label>
-        <input type='text' name='product' id='product' />
+        <input ref={productInputRef} type='text' name='product' id='product' />
       </div>
       <div>
-        <input type='submit' value='Create' />
+        <input disabled={isButtonDisabled} type='submit' value='Create' />
       </div>
     </form>
   )

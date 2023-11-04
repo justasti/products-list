@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createMeal } from '../meals/thunks'
 import { Product } from '../models'
 import { productsSliceName } from './constants'
-import { getProducts } from './thunks'
+import { createProduct, getProducts } from './thunks'
 
 export interface ProductsState {
   products: Product[]
@@ -28,6 +28,9 @@ export const productsSlice = createSlice({
       }),
       builder.addCase(getProducts.rejected, (state) => {
         state.loading = false
+      }),
+      builder.addCase(createProduct.fulfilled, (state, action) => {
+        state.products.push(action.meta.arg)
       }),
       builder.addCase(createMeal.fulfilled, (state, action) => {
         for (const product of action.meta.arg.products) {
