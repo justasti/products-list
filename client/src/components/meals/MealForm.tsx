@@ -25,7 +25,7 @@ export const NewMealForm = () => {
   }))
 
   useEffect(() => {
-    if (!products.length) dispatch(getProducts())
+    if (products.length < 2) dispatch(getProducts())
   }, [])
 
   const handleChange = (_, meta: ActionMeta<SelectOptionType>) => {
@@ -96,7 +96,7 @@ export const NewMealForm = () => {
               <input onChange={handleAmountChange} type='number' step={0.1} name={product.id} id={product.id} />
             </div>
           ))}
-          <input type='submit' value='Create meal' />
+          <input disabled={isButtonDisabled} type='submit' value='Create meal' />
         </form>
       </>
     )
@@ -118,7 +118,7 @@ export const NewMealForm = () => {
         </div>
         <CreatableSelect isMulti options={productOptions} onChange={handleChange}></CreatableSelect>
         <div>
-          <input disabled={isButtonDisabled} type='submit' value='Add Amounts' />
+          <input type='submit' value='Add Amounts' />
         </div>
       </form>
     </>
