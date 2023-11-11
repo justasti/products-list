@@ -3,7 +3,6 @@ import { SyntheticEvent, useEffect, useState } from 'react'
 import { ActionMeta } from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import { createMeal } from '../../state/meals/thunks'
 import { Meal, MealProduct, Product } from '../../state/models'
 import { selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
@@ -14,9 +13,7 @@ type SelectOptionType = { label: string; value: string }
 export const NewMealForm = () => {
   const dispatch = useAppDispatch()
   const [mealProducts, setMealProducts] = useState<Product[]>([])
-  const [productsWithAmount, setProductsWithAmount] = useState<MealProduct[]>(
-    []
-  )
+  const [productsWithAmount, setProductsWithAmount] = useState<MealProduct[]>([])
   const [productName, setProductName] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
   const [isProductsSelected, setIsProductsSelected] = useState(false)
@@ -30,38 +27,31 @@ export const NewMealForm = () => {
     dispatch(getProducts())
   }, [])
 
-  const handleChange = (
-    options: SelectOptionType[],
-    meta: ActionMeta<SelectOptionType>
-  ) => {
+  const handleChange = (_, meta: ActionMeta<SelectOptionType>) => {
     if (meta.action === 'create-option') {
-      setMealProducts((current) => [
-        ...current,
-        { id: nanoid(), name: meta.option.label },
-      ])
+      setMealProducts((current) => [...current, { id: nanoid(), name: meta.option.label }])
+    } else if (meta.action === 'select-option') {
+      setMealProducts((current) => [...current, { id: meta.option.value, name: meta.option.label }])
+    } else if (meta.action === 'clear') {
+      setMealProducts([])
     } else {
-      const selectedOptions = options.map((option) => ({
-        id: option.value,
-        name: option.label,
-      }))
-      setMealProducts(selectedOptions)
+      setMealProducts((current) => current.filter((product) => product.name !== meta.removedValue.label))
     }
   }
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const productToAddAmount = mealProducts.find(
-      (product) => product.id === e.target.id
-    )
+    const productToAddAmount = mealProducts.find((product) => product.id === e.target.id)
+
     const updatedProduct = {
       ...productToAddAmount,
       amount: e.target.value,
     }
 
+    console.log({ productToAddAmount, updatedProduct })
+
     if (productsWithAmount.find((prod) => prod.id === updatedProduct.id)) {
       setProductsWithAmount((current) =>
-        current.map((product) =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        )
+        current.map((product) => (product.id === updatedProduct.id ? updatedProduct : product))
       )
     } else {
       setProductsWithAmount((current) => [...current, updatedProduct])
@@ -81,11 +71,12 @@ export const NewMealForm = () => {
       }
 
       try {
-        const res = await dispatch(createMeal(meal))
-        if (res.meta.requestStatus !== 'rejected') {
-          setMealProducts([])
-          setProductName('')
-        }
+        console.log(meal)
+        // const res = await dispatch(createMeal(meal))
+        // if (res.meta.requestStatus !== 'rejected') {
+        //   setMealProducts([])
+        //   setProductName('')
+        // }
       } finally {
         setIsButtonDisabled(false)
       }
@@ -104,13 +95,7 @@ export const NewMealForm = () => {
           {mealProducts.map((product) => (
             <div key={product.id}>
               <label htmlFor={product.id}>{product.name}</label>
-              <input
-                onChange={handleAmountChange}
-                type='number'
-                step={0.1}
-                name={product.id}
-                id={product.id}
-              />
+              <input onChange={handleAmountChange} type='number' step={0.1} name={product.id} id={product.id} />
             </div>
           ))}
           <input type='submit' value='Create meal' />
@@ -133,17 +118,9 @@ export const NewMealForm = () => {
             onChange={(e) => setProductName(e.target.value)}
           />
         </div>
-        <CreatableSelect
-          isMulti
-          options={productOptions}
-          onChange={handleChange}
-        ></CreatableSelect>
+        <CreatableSelect isMulti options={productOptions} onChange={handleChange}></CreatableSelect>
         <div>
-          <input
-            disabled={isButtonDisabled}
-            type='submit'
-            value='Add Amounts'
-          />
+          <input disabled={isButtonDisabled} type='submit' value='Add Amounts' />
         </div>
       </form>
     </>
