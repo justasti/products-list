@@ -23,7 +23,7 @@ export const Meals = () => {
         {meals &&
           meals.map((meal: Meal) => (
             <div key={meal._id}>
-              <Link to={meal._id}>{meal.mealName}</Link>
+              <Link to={meal._id}>{meal.name}</Link>
             </div>
           ))}
       </div>

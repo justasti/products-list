@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: nanoid,
   },
-  productName: {
+  name: {
     type: String,
     required: true,
   },

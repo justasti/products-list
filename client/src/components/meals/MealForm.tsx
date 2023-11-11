@@ -17,13 +17,13 @@ export const NewMealForm = () => {
   const [productsWithAmount, setProductsWithAmount] = useState<MealProduct[]>(
     []
   )
-  const [mealName, setMealName] = useState('')
+  const [productName, setProductName] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
   const [isProductsSelected, setIsProductsSelected] = useState(false)
   const products = useAppSelector(selectProducts)
   const productOptions = products.map((prod) => ({
     value: prod._id,
-    label: prod.productName,
+    label: prod.name,
   }))
 
   useEffect(() => {
@@ -37,12 +37,12 @@ export const NewMealForm = () => {
     if (meta.action === 'create-option') {
       setMealProducts((current) => [
         ...current,
-        { _id: nanoid(), productName: meta.option.label },
+        { _id: nanoid(), name: meta.option.label },
       ])
     } else {
       const selectedOptions = options.map((option) => ({
         _id: option.value,
-        productName: option.label,
+        name: option.label,
       }))
       setMealProducts(selectedOptions)
     }
@@ -54,7 +54,7 @@ export const NewMealForm = () => {
     )
     const updatedProduct = {
       ...productToAddAmount,
-      productAmount: e.target.value,
+      amount: e.target.value,
     }
 
     if (productsWithAmount.find((prod) => prod._id === updatedProduct._id)) {
@@ -76,7 +76,7 @@ export const NewMealForm = () => {
 
       const meal: Meal = {
         _id: nanoid(),
-        mealName,
+        name: productName,
         products: productsWithAmount,
       }
 
@@ -86,7 +86,7 @@ export const NewMealForm = () => {
         const res = await dispatch(createMeal(meal))
         if (res.meta.requestStatus !== 'rejected') {
           setMealProducts([])
-          setMealName('')
+          setProductName('')
         }
       } finally {
         setIsButtonDisabled(false)
@@ -105,7 +105,7 @@ export const NewMealForm = () => {
         <form onSubmit={handleSubmit}>
           {mealProducts.map((product) => (
             <div key={product._id}>
-              <label htmlFor={product._id}>{product.productName}</label>
+              <label htmlFor={product._id}>{product.name}</label>
               <input
                 onChange={handleAmountChange}
                 type='number'
@@ -130,8 +130,8 @@ export const NewMealForm = () => {
             type='text'
             name='meal'
             id='meal'
-            value={mealName}
-            onChange={(e) => setMealName(e.target.value)}
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
           />
         </div>
         <CreatableSelect

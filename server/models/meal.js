@@ -7,7 +7,7 @@ const mealSchema = new mongoose.Schema({
     type: String,
     default: nanoid,
   },
-  mealName: {
+  name: {
     type: String,
     required: true,
     trim: true,
@@ -15,8 +15,8 @@ const mealSchema = new mongoose.Schema({
   products: [
     {
       _id: { type: String, default: nanoid, ref: productSchema },
-      productName: { type: String, ref: productSchema },
-      productAmount: Number,
+      name: { type: String, ref: productSchema },
+      amount: Number,
     },
   ],
 })

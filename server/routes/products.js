@@ -13,7 +13,7 @@ router.post('/', validateSchema(productValidation), async (req, res) => {
   try {
     const product = {
       _id: req.body._id,
-      productName: req.body.productName,
+      name: req.body.name,
     }
 
     await Product.create(product)

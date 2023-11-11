@@ -34,13 +34,9 @@ export const productsSlice = createSlice({
       }),
       builder.addCase(createMeal.fulfilled, (state, action) => {
         for (const product of action.meta.arg.products) {
-          if (
-            !state.products.find(
-              (prod) => prod.productName === product.productName
-            )
-          ) {
+          if (!state.products.find((prod) => prod.name === product.name)) {
             state.products.push({
-              productName: product.productName,
+              name: product.name,
               _id: product._id,
             })
           }

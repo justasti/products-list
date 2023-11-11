@@ -18,12 +18,12 @@ export const MealPage = () => {
 
   return (
     <>
-      <h1>{meal.mealName}</h1>
+      <h1>{meal.name}</h1>
       <h2>Products:</h2>
       <ul>
         {meal.products.map((prod) => (
           <li key={prod._id}>
-            {prod.productName} - {prod.productAmount}
+            {prod.name} - {prod.amount}
           </li>
         ))}
       </ul>

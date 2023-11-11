@@ -12,7 +12,7 @@ export const NewProductForm = () => {
     e.preventDefault()
     setIsButtonDisabled(true)
     const newProduct = {
-      productName: productInputRef.current.value,
+      name: productInputRef.current.value,
       _id: nanoid(),
     }
     try {

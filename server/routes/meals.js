@@ -14,7 +14,7 @@ router.post('/', validateSchema(mealValidation), async (req, res) => {
   try {
     const meal = {
       _id: req.body._id,
-      mealName: req.body.mealName,
+      name: req.body.name,
       products: req.body.products,
     }
 
@@ -25,7 +25,7 @@ router.post('/', validateSchema(mealValidation), async (req, res) => {
 
     for (const product of meal.products) {
       const existingProduct = await Product.findOne({
-        productName: product.productName,
+        name: product.name,
       }).exec()
 
       if (!existingProduct) {
@@ -34,7 +34,7 @@ router.post('/', validateSchema(mealValidation), async (req, res) => {
           createdProducts.push(newProduct)
         } catch (error) {
           failedProducts.push({
-            productName: product.productName,
+            name: product.name,
             error: 'Failed to create product',
           })
         }

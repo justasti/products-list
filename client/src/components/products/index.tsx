@@ -26,7 +26,7 @@ export const Products = () => {
       <div>
         {products &&
           products.map((product: Product) => (
-            <div key={product._id}>{product.productName}</div>
+            <div key={product._id}>{product.name}</div>
           ))}
       </div>
       <Link to='/products/new'>Add new product</Link>
