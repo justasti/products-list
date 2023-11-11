@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { mealsApi } from '../mealsApi/api'
-import { GetMealByIdPayload, Meal } from '../models'
+import { GetMealByIdPayload, Meal, RejectedActionPayload } from '../models'
 import { ThunkApi } from '../store'
 import { mealsSliceName } from './constants'
 
@@ -18,7 +18,11 @@ export const getMeals = createAsyncThunk<Meal[], void, ThunkApi>(
   }
 )
 
-export const getMealById = createAsyncThunk<Meal, GetMealByIdPayload, ThunkApi>(
+export const getMealById = createAsyncThunk<
+  Meal,
+  GetMealByIdPayload,
+  ThunkApi<RejectedActionPayload>
+>(
   `${mealsSliceName}/getMealById`,
   async ({ _id }, { dispatch, rejectWithValue }) => {
     try {

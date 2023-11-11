@@ -3,6 +3,7 @@ import { Meals } from '../components/meals'
 import { NewMealForm } from '../components/meals/MealForm'
 import { Products } from '../components/products'
 import { NewProductForm } from '../components/products/NewProductForm'
+import { PageNotFound } from '../pages/404'
 import { Homepage } from '../pages/home'
 import { MealPage } from '../pages/meal'
 
@@ -41,6 +42,10 @@ const App = () => {
               element: <MealPage />,
             },
           ],
+        },
+        {
+          path: '404',
+          element: <PageNotFound />,
         },
       ],
     },

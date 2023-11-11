@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
-import { useAppDispatch } from '../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../state/hooks'
+import { selectMealNotFound } from '../../state/meals/selectors'
 import { getMealById } from '../../state/meals/thunks'
 import { Meal } from '../../state/models'
 
@@ -9,12 +10,15 @@ export const MealPage = () => {
   const dispatch = useAppDispatch()
   const { _id } = useParams()
   const [meal, setMeal] = useState<Meal>()
+  const mealNotFound = useAppSelector(selectMealNotFound)
 
   useEffect(() => {
     dispatch(getMealById({ _id })).then((data) => setMeal(data.payload as Meal))
   }, [_id])
 
   if (!meal) return <LoadingSpinner />
+
+  if (mealNotFound) return <Navigate to={'/404'} />
 
   return (
     <>

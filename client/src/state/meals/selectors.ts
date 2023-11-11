@@ -10,3 +10,8 @@ export const selectIsMealsLoading = createSelector(
   selectMealsState,
   (state) => state.loading
 )
+
+export const selectMealNotFound = createSelector(
+  selectMealsState,
+  (state) => state.notFound
+)

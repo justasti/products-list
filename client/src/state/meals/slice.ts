@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Meal } from '../models'
 import { mealsSliceName } from './constants'
-import { createMeal, getMeals } from './thunks'
+import { createMeal, getMealById, getMeals } from './thunks'
 
 interface MealsState {
   meals: Meal[]
   loading: boolean
+  notFound: boolean
 }
 
 const initialState: MealsState = {
   meals: [],
   loading: false,
+  notFound: false,
 }
 
 export const mealsSlice = createSlice({
@@ -30,6 +32,12 @@ export const mealsSlice = createSlice({
       }),
       builder.addCase(createMeal.fulfilled, (state, action) => {
         state.meals.push(action.meta.arg)
-      })
+      }),
+        builder.addCase(getMealById.pending, (state) => {
+          state.notFound = false
+        }),
+        builder.addCase(getMealById.rejected, (state, action) => {
+          if (action.payload.status === 404) state.notFound = true
+        })
   },
 })
