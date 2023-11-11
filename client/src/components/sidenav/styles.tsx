@@ -12,8 +12,8 @@ export const StyledNavbar = styled.nav<NavProps>`
   top: 0;
   left: 0;
   height: 100dvh;
-  border-right: ${($mobile) => ($mobile ? 'unset' : '1px solid #ccc')};
-  border-top: ${($mobile) => ($mobile ? '1px solid #ccc' : 'unset')};
+  border-right: 1px solid #ccc;
+  border-top: unset;
   background-color: #fff;
   > ul {
     display: flex;
@@ -38,28 +38,28 @@ export const StyledNavbar = styled.nav<NavProps>`
   .hidden {
     display: none;
   }
-  ${(props) =>
-    props.$mobile
-      ? `
-      position: fixed;
-      top: 100vh;
-      transform: translateY(-100%);
-      width: 100%;
-      height: 72px;
-      flex-direction: row;
-      display: flex;
-      align-items: center;
 
-      ul {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-      }
-      
-      .category-title {
-        margin: 0;
-      }
-    `
-      : undefined};
+  @media only screen and (max-width: 600px) {
+    border-right: unset;
+    border-top: 1px solid #ccc;
+    position: fixed;
+    top: 100dvh;
+    transform: translateY(-100%);
+    width: 100%;
+    height: 72px;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+
+    ul {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .category-title {
+      margin: 0;
+    }
+  }
 `
