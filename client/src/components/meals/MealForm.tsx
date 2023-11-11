@@ -3,6 +3,7 @@ import { SyntheticEvent, useEffect, useState } from 'react'
 import { ActionMeta } from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
+import { createMeal } from '../../state/meals/thunks'
 import { Meal, MealProduct, Product } from '../../state/models'
 import { selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
@@ -47,8 +48,6 @@ export const NewMealForm = () => {
       amount: e.target.value,
     }
 
-    console.log({ productToAddAmount, updatedProduct })
-
     if (productsWithAmount.find((prod) => prod.id === updatedProduct.id)) {
       setProductsWithAmount((current) =>
         current.map((product) => (product.id === updatedProduct.id ? updatedProduct : product))
@@ -71,12 +70,11 @@ export const NewMealForm = () => {
       }
 
       try {
-        console.log(meal)
-        // const res = await dispatch(createMeal(meal))
-        // if (res.meta.requestStatus !== 'rejected') {
-        //   setMealProducts([])
-        //   setProductName('')
-        // }
+        const res = await dispatch(createMeal(meal))
+        if (res.meta.requestStatus !== 'rejected') {
+          setMealProducts([])
+          setProductName('')
+        }
       } finally {
         setIsButtonDisabled(false)
       }
