@@ -5,12 +5,14 @@ import { mealsSlice } from './meals/slice'
 import { mealsApi } from './mealsApi/api'
 import { productsSlice } from './products/slice'
 import { productsApi } from './productsApi/api'
+import { shoppingCartSlice } from './shopping-cart/slice'
 
 const rootReducer = combineReducers({
   [mealsSlice.name]: mealsSlice.reducer,
   [mealsApi.reducerPath]: mealsApi.reducer,
   [productsSlice.name]: productsSlice.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
+  [shoppingCartSlice.name]: shoppingCartSlice.reducer,
 })
 
 const persistConfig = {
