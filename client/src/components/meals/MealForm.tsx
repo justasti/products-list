@@ -22,7 +22,7 @@ export const NewMealForm = () => {
   const [isProductsSelected, setIsProductsSelected] = useState(false)
   const products = useAppSelector(selectProducts)
   const productOptions = products.map((prod) => ({
-    value: prod._id,
+    value: prod.id,
     label: prod.name,
   }))
 
@@ -37,11 +37,11 @@ export const NewMealForm = () => {
     if (meta.action === 'create-option') {
       setMealProducts((current) => [
         ...current,
-        { _id: nanoid(), name: meta.option.label },
+        { id: nanoid(), name: meta.option.label },
       ])
     } else {
       const selectedOptions = options.map((option) => ({
-        _id: option.value,
+        id: option.value,
         name: option.label,
       }))
       setMealProducts(selectedOptions)
@@ -50,17 +50,17 @@ export const NewMealForm = () => {
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const productToAddAmount = mealProducts.find(
-      (product) => product._id === e.target.id
+      (product) => product.id === e.target.id
     )
     const updatedProduct = {
       ...productToAddAmount,
       amount: e.target.value,
     }
 
-    if (productsWithAmount.find((prod) => prod._id === updatedProduct._id)) {
+    if (productsWithAmount.find((prod) => prod.id === updatedProduct.id)) {
       setProductsWithAmount((current) =>
         current.map((product) =>
-          product._id === updatedProduct._id ? updatedProduct : product
+          product.id === updatedProduct.id ? updatedProduct : product
         )
       )
     } else {
@@ -75,12 +75,10 @@ export const NewMealForm = () => {
       setIsButtonDisabled(true)
 
       const meal: Meal = {
-        _id: nanoid(),
+        id: nanoid(),
         name: productName,
         products: productsWithAmount,
       }
-
-      console.log(meal)
 
       try {
         const res = await dispatch(createMeal(meal))
@@ -104,13 +102,14 @@ export const NewMealForm = () => {
         <h1>Create a new meal</h1>
         <form onSubmit={handleSubmit}>
           {mealProducts.map((product) => (
-            <div key={product._id}>
-              <label htmlFor={product._id}>{product.name}</label>
+            <div key={product.id}>
+              <label htmlFor={product.id}>{product.name}</label>
               <input
                 onChange={handleAmountChange}
                 type='number'
-                name={product._id}
-                id={product._id}
+                step={0.1}
+                name={product.id}
+                id={product.id}
               />
             </div>
           ))}

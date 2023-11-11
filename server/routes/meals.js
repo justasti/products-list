@@ -13,7 +13,7 @@ const mealValidation = require('../validation/mealValidation')
 router.post('/', validateSchema(mealValidation), async (req, res) => {
   try {
     const meal = {
-      _id: req.body._id,
+      _id: req.body.id,
       name: req.body.name,
       products: req.body.products,
     }

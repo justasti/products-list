@@ -23,8 +23,7 @@ export const createProduct = createAsyncThunk<void, Product, ThunkApi>(
   async (product, { dispatch, rejectWithValue, getState }) => {
     try {
       const existingProduct = getState().products.products.find(
-        (prod) =>
-          prod.name.toLocaleLowerCase() === product.name.toLocaleLowerCase()
+        (prod) => prod.name.toLowerCase() === product.name.toLowerCase()
       )
       if (!existingProduct) {
         return await dispatch(

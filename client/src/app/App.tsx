@@ -1,11 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Meals } from '../components/meals'
 import { NewMealForm } from '../components/meals/MealForm'
-import { Products } from '../components/products'
 import { NewProductForm } from '../components/products/NewProductForm'
 import { PageNotFound } from '../pages/404'
 import { Homepage } from '../pages/home'
 import { MealPage } from '../pages/meal'
+import { Products } from '../pages/products'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -38,7 +38,7 @@ const App = () => {
               element: <NewMealForm />,
             },
             {
-              path: ':_id',
+              path: ':id',
               element: <MealPage />,
             },
           ],

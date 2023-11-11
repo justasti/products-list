@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { Product } from '../../state/models'
 import {
@@ -7,7 +8,6 @@ import {
   selectProducts,
 } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
-import { LoadingSpinner } from '../LoadingSpinner'
 
 export const Products = () => {
   const products = useAppSelector(selectProducts)
@@ -26,7 +26,7 @@ export const Products = () => {
       <div>
         {products &&
           products.map((product: Product) => (
-            <div key={product._id}>{product.name}</div>
+            <div key={product.id}>{product.name}</div>
           ))}
       </div>
       <Link to='/products/new'>Add new product</Link>

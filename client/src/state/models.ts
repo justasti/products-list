@@ -1,22 +1,39 @@
-export interface Product {
+export interface ProductApiResponse {
   _id: string
   name: string
 }
 
-export interface MealProduct {
+export interface Product {
+  id: string
+  name: string
+}
+
+export interface MealProductApiResponse {
   _id: string
   name: string
   amount: string
 }
 
-export interface Meal {
+export interface MealProduct {
+  id: string
+  name: string
+  amount: string
+}
+
+export interface MealApiResponse {
   _id: string
+  name: string
+  products: MealProductApiResponse[]
+}
+
+export interface Meal {
+  id: string
   name: string
   products: MealProduct[]
 }
 
 export interface GetMealByIdPayload {
-  _id: string
+  id: string
 }
 
 export interface RejectedActionPayload {

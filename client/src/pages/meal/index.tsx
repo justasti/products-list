@@ -8,16 +8,15 @@ import { Meal } from '../../state/models'
 
 export const MealPage = () => {
   const dispatch = useAppDispatch()
-  const { _id } = useParams()
+  const { id } = useParams()
   const [meal, setMeal] = useState<Meal>()
   const mealNotFound = useAppSelector(selectMealNotFound)
 
   useEffect(() => {
-    dispatch(getMealById({ _id })).then((data) => setMeal(data.payload as Meal))
-  }, [_id])
+    dispatch(getMealById({ id })).then((data) => setMeal(data.payload as Meal))
+  }, [id])
 
   if (!meal) return <LoadingSpinner />
-
   if (mealNotFound) return <Navigate to={'/404'} />
 
   return (
@@ -26,7 +25,7 @@ export const MealPage = () => {
       <h2>Products:</h2>
       <ul>
         {meal.products.map((prod) => (
-          <li key={prod._id}>
+          <li key={prod.id}>
             {prod.name} - {prod.amount}
           </li>
         ))}

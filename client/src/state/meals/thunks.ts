@@ -24,10 +24,10 @@ export const getMealById = createAsyncThunk<
   ThunkApi<RejectedActionPayload>
 >(
   `${mealsSliceName}/getMealById`,
-  async ({ _id }, { dispatch, rejectWithValue }) => {
+  async ({ id }, { dispatch, rejectWithValue }) => {
     try {
       const meal = await dispatch(
-        mealsApi.endpoints.getMealById.initiate(_id)
+        mealsApi.endpoints.getMealById.initiate(id)
       ).unwrap()
       return meal
     } catch (error) {

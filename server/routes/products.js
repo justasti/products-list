@@ -12,7 +12,7 @@ const productValidation = require('../validation/productValidation');
 router.post('/', validateSchema(productValidation), async (req, res) => {
   try {
     const product = {
-      _id: req.body._id,
+      _id: req.body.id,
       name: req.body.name,
     }
 
