@@ -1,17 +1,12 @@
-export interface ProductApiResponse {
-  _id: string
-  name: string
-}
-
 export interface Product {
   id: string
   name: string
 }
 
-export interface MealProductApiResponse {
-  _id: string
+export interface Meal {
+  id: string
   name: string
-  amount: string
+  products: MealProduct[]
 }
 
 export interface MealProduct {
@@ -20,16 +15,16 @@ export interface MealProduct {
   amount: string
 }
 
-export interface MealApiResponse {
+export interface ProductApiResponse extends Omit<Product, 'id'> {
   _id: string
-  name: string
-  products: MealProductApiResponse[]
 }
 
-export interface Meal {
-  id: string
-  name: string
-  products: MealProduct[]
+export interface MealApiResponse extends Omit<Meal, 'id'> {
+  _id: string
+}
+
+export interface MealProductApiResponse extends Omit<MealProduct, 'id'> {
+  _id: string
 }
 
 export interface GetMealByIdPayload {
