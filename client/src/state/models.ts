@@ -1,20 +1,20 @@
 export interface Product {
-  uniqueId: string
+  _id: string
   productName: string
 }
 
 export interface MealProduct {
-  uniqueId: string
+  _id: string
   productName: string
   productAmount: string
 }
 
 export interface Meal {
-  uniqueId: string
+  _id: string
   mealName: string
   products: MealProduct[]
 }
 
 export interface GetMealByIdPayload {
-  id: string
+  _id: string
 }

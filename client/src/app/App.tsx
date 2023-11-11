@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Meals } from '../components/meals'
-import { NewMealForm } from '../components/meals/NewMealForm'
+import { NewMealForm } from '../components/meals/MealForm'
 import { Products } from '../components/products'
 import { NewProductForm } from '../components/products/NewProductForm'
 import { Homepage } from '../pages/home'
@@ -37,7 +37,7 @@ const App = () => {
               element: <NewMealForm />,
             },
             {
-              path: ':uniqueId',
+              path: ':_id',
               element: <MealPage />,
             },
           ],

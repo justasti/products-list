@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
+const nanoid = import('nanoid')
 
 const productSchema = new mongoose.Schema({
-  uniqueId: {
+  _id: {
     type: String,
-    required: true,
-    default: () => nanoid(),
-    index: { unique: true },
+    default: nanoid,
   },
   productName: {
     type: String,

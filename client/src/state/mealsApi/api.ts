@@ -13,8 +13,8 @@ export const mealsApi = createApi({
       }),
     }),
     getMealById: builder.query<Meal, string>({
-      query: (id) => ({
-        url: `/meals/${id}`,
+      query: (_id) => ({
+        url: `/meals/${_id}`,
         method: 'GET',
       }),
     }),

@@ -20,10 +20,10 @@ export const getMeals = createAsyncThunk<Meal[], void, ThunkApi>(
 
 export const getMealById = createAsyncThunk<Meal, GetMealByIdPayload, ThunkApi>(
   `${mealsSliceName}/getMealById`,
-  async ({ id }, { dispatch, rejectWithValue }) => {
+  async ({ _id }, { dispatch, rejectWithValue }) => {
     try {
       const meal = await dispatch(
-        mealsApi.endpoints.getMealById.initiate(id)
+        mealsApi.endpoints.getMealById.initiate(_id)
       ).unwrap()
       return meal
     } catch (error) {

@@ -12,12 +12,18 @@ const mealValidation = require('../validation/mealValidation')
 // Create a new meal
 router.post('/', validateSchema(mealValidation), async (req, res) => {
   try {
-    const meal = await Meal.create(req.body)
+    const meal = {
+      _id: req.body._id,
+      mealName: req.body.mealName,
+      products: req.body.products,
+    }
+
+    await Meal.create(meal)
 
     const createdProducts = []
     const failedProducts = []
 
-    for (const product of req.body.products) {
+    for (const product of meal.products) {
       const existingProduct = await Product.findOne({
         productName: product.productName,
       }).exec()
@@ -64,7 +70,7 @@ router.get('/', async (_req, res) => {
 // Read a single meal by ID
 router.get('/:id', async (req, res) => {
   try {
-    const meal = await Meal.findOne({ uniqueId: req.params.id })
+    const meal = await Meal.findOne({ _id: req.params.id })
     if (!meal) {
       return res.status(404).json({ error: 'Meal not found' })
     }
@@ -77,7 +83,7 @@ router.get('/:id', async (req, res) => {
 // Update a meal
 router.put('/:id', validateSchema(mealValidation), async (req, res) => {
   try {
-    const meal = await Meal.findByIdAndUpdate(req.params.id, req.body, {
+    const meal = await Meal.findByIdAndUpdate(req.params._id, req.body, {
       new: true,
     })
     res.status(200).json(meal)
@@ -89,7 +95,7 @@ router.put('/:id', validateSchema(mealValidation), async (req, res) => {
 // Delete a meal
 router.delete('/:id', async (req, res) => {
   try {
-    await Meal.findByIdAndRemove(req.params.id)
+    await Meal.findByIdAndRemove(req.params._id)
     res.status(200).json({ message: 'Meal deleted successfully' })
   } catch (error) {
     res.status(500).json({ error: 'Could not delete meal' })

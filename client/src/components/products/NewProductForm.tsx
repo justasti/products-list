@@ -13,7 +13,7 @@ export const NewProductForm = () => {
     setIsButtonDisabled(true)
     const newProduct = {
       productName: productInputRef.current.value,
-      uniqueId: nanoid(),
+      _id: nanoid(),
     }
     try {
       const res = await dispatch(createProduct(newProduct))

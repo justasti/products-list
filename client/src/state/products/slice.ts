@@ -41,7 +41,7 @@ export const productsSlice = createSlice({
           ) {
             state.products.push({
               productName: product.productName,
-              uniqueId: product.uniqueId,
+              _id: product._id,
             })
           }
         }
