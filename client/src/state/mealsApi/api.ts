@@ -15,11 +15,7 @@ export const mealsApi = createApi({
         meals.map((meal) => ({
           id: meal._id,
           name: meal.name,
-          products: meal.products.map((product) => ({
-            id: product._id,
-            name: product.name,
-            amount: product.amount,
-          })),
+          products: meal.products,
         })),
     }),
     getMealById: builder.query<Meal, string>({
@@ -30,11 +26,7 @@ export const mealsApi = createApi({
       transformResponse: (meal: MealApiResponse) => ({
         id: meal._id,
         name: meal.name,
-        products: meal.products.map((product) => ({
-          id: product._id,
-          name: product.name,
-          amount: product.amount,
-        })),
+        products: meal.products,
       }),
     }),
     createMeal: builder.mutation<void, Meal>({

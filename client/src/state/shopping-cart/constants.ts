@@ -1,1 +1,1 @@
-export const shoppingCartSliceName = 'shopping-cart'
+export const shoppingCartSliceName = 'shoppingCart'

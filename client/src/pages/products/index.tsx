@@ -1,12 +1,10 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
+import { ProductCard } from '../../components/products/ProductCard'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { Product } from '../../state/models'
-import {
-  selectIsProductsLoading,
-  selectProducts,
-} from '../../state/products/selectors'
+import { selectIsProductsLoading, selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
 
 export const Products = () => {
@@ -23,12 +21,7 @@ export const Products = () => {
 
   return (
     <>
-      <div>
-        {products &&
-          products.map((product: Product) => (
-            <div key={product.id}>{product.name}</div>
-          ))}
-      </div>
+      <div>{products && products.map((product: Product) => <ProductCard key={product.id} product={product} />)}</div>
       <Link to='/products/new'>Add new product</Link>
     </>
   )

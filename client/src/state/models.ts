@@ -6,13 +6,13 @@ export interface Product {
 export interface Meal {
   id: string
   name: string
-  products: MealProduct[]
+  products: ProductWithAmount[]
 }
 
-export interface MealProduct {
+export interface ProductWithAmount {
   id: string
   name: string
-  amount: string
+  amount: number
 }
 
 export interface ProductApiResponse extends Omit<Product, 'id'> {
@@ -23,7 +23,7 @@ export interface MealApiResponse extends Omit<Meal, 'id'> {
   _id: string
 }
 
-export interface MealProductApiResponse extends Omit<MealProduct, 'id'> {
+export interface MealProductApiResponse extends Omit<ProductWithAmount, 'id'> {
   _id: string
 }
 

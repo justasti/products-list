@@ -4,7 +4,7 @@ import { ActionMeta } from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { createMeal } from '../../state/meals/thunks'
-import { Meal, MealProduct, Product } from '../../state/models'
+import { Meal, Product, ProductWithAmount } from '../../state/models'
 import { selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
 import { LoadingSpinner } from '../LoadingSpinner'
@@ -14,7 +14,7 @@ type SelectOptionType = { label: string; value: string }
 export const NewMealForm = () => {
   const dispatch = useAppDispatch()
   const [mealProducts, setMealProducts] = useState<Product[]>([])
-  const [productsWithAmount, setProductsWithAmount] = useState<MealProduct[]>([])
+  const [productsWithAmount, setProductsWithAmount] = useState<ProductWithAmount[]>([])
   const [productName, setProductName] = useState('')
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
   const [isProductsSelected, setIsProductsSelected] = useState(false)
@@ -25,7 +25,7 @@ export const NewMealForm = () => {
   }))
 
   useEffect(() => {
-    dispatch(getProducts())
+    if (!products.length) dispatch(getProducts())
   }, [])
 
   const handleChange = (_, meta: ActionMeta<SelectOptionType>) => {
@@ -45,7 +45,7 @@ export const NewMealForm = () => {
 
     const updatedProduct = {
       ...productToAddAmount,
-      amount: e.target.value,
+      amount: e.target.valueAsNumber,
     }
 
     if (productsWithAmount.find((prod) => prod.id === updatedProduct.id)) {

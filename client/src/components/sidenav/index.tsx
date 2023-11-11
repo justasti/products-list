@@ -13,10 +13,7 @@ export const Sidenav = () => {
         <li className='category'>
           <div className='category-title'>
             <LunchDining fontSize={isMobile ? 'large' : 'medium'} />
-            <h3
-              className={isMobile ? 'hidden' : undefined}
-              onClick={() => navigate('/meals')}
-            >
+            <h3 className={isMobile ? 'hidden' : undefined} onClick={() => navigate('/meals')}>
               Meals
             </h3>
           </div>
@@ -28,10 +25,7 @@ export const Sidenav = () => {
         <li className='category'>
           <div className='category-title'>
             <Egg fontSize={isMobile ? 'large' : 'medium'} />
-            <h3
-              className={isMobile ? 'hidden' : undefined}
-              onClick={() => navigate('/products')}
-            >
+            <h3 className={isMobile ? 'hidden' : undefined} onClick={() => navigate('/products')}>
               Products
             </h3>
           </div>
@@ -39,7 +33,9 @@ export const Sidenav = () => {
         <li className='category'>
           <div className='category-title'>
             <ShoppingCart fontSize={isMobile ? 'large' : 'medium'} />
-            <h3 className={isMobile ? 'hidden' : undefined}>Shopping List</h3>
+            <h3 onClick={() => navigate('/cart')} className={isMobile ? 'hidden' : undefined}>
+              Shopping List
+            </h3>
           </div>
         </li>
         <li className='category'>
