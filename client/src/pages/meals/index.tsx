@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { selectIsMealsLoading, selectMeals } from '../../state/meals/selectors'
 import { getMeals } from '../../state/meals/thunks'
 import { Meal } from '../../state/models'
-import { LoadingSpinner } from '../LoadingSpinner'
 
 export const Meals = () => {
   const meals = useAppSelector(selectMeals)
@@ -12,7 +12,7 @@ export const Meals = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getMeals())
+    if (!meals.length) dispatch(getMeals())
   }, [])
 
   if (isMealsLoading) return <LoadingSpinner />

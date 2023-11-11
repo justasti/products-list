@@ -16,7 +16,7 @@ export const Products = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getProducts())
+    if (!products.length) dispatch(getProducts())
   }, [])
 
   if (isProductsLoading) return <LoadingSpinner />
