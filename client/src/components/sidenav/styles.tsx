@@ -6,13 +6,15 @@ interface NavProps {
 
 export const StyledNavbar = styled.nav<NavProps>`
   width: 200px;
-  padding: ${(props) => (props.$mobile ? '16px' : '64px 16px')};
+  padding: ${({ $mobile }) => ($mobile ? '16px' : '64px 16px')};
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
   height: 100dvh;
-  border-right: 1px solid #ccc;
+  border-right: ${($mobile) => ($mobile ? 'unset' : '1px solid #ccc')};
+  border-top: ${($mobile) => ($mobile ? '1px solid #ccc' : 'unset')};
+  background-color: #fff;
   > ul {
     display: flex;
     flex-direction: column;
