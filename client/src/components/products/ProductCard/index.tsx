@@ -22,6 +22,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
     if (isAddButtonClicked) {
       dispatch(addToCart({ ...product, amount: productAmountRef.current.valueAsNumber }))
       setIsAddButtonClicked(false)
+      productAmountRef.current.blur()
     } else {
       productAmountRef.current.focus()
       setIsAddButtonClicked(true)
