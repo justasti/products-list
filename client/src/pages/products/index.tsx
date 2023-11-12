@@ -21,7 +21,9 @@ export const Products = () => {
 
   return (
     <>
-      <div>{products && products.map((product: Product) => <ProductCard key={product.id} product={product} />)}</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '18px 12px' }}>
+        {products && products.map((product: Product) => <ProductCard key={product.id} product={product} />)}
+      </div>
       <Link to='/products/new'>Add new product</Link>
     </>
   )

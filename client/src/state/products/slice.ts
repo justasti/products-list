@@ -10,7 +10,12 @@ export interface ProductsState {
 }
 
 const initialState: ProductsState = {
-  products: [],
+  products: [
+    // { id: '7UKW3WQnQVpjUrH8sVSvf', name: 'Sviestas Sviesteliumbyzas' },
+    // { id: '-5JuRLu2O-eTh9n9S90-x', name: 'Duona' },
+    // { id: 'KZYdKbrwZhAcdpyZUGOzb', name: 'Dešra' },
+    // { id: 'lfAdnAPVtkm2o8lFIRpZT', name: 'Kiaušinis' },
+  ],
   loading: false,
 }
 

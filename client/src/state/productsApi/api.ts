@@ -12,7 +12,9 @@ export const productsApi = createApi({
         method: 'GET',
       }),
       transformResponse: (products: ProductApiResponse[]) =>
-        products.map((product) => ({ id: product._id, name: product.name })),
+        products
+          .map((product) => ({ id: product._id, name: product.name }))
+          .sort((a, b) => a.name.localeCompare(b.name)),
     }),
     createProduct: builder.mutation<void, Product>({
       query: (body) => ({

@@ -5,6 +5,7 @@ interface NavProps {
 }
 
 export const StyledNavbar = styled.nav<NavProps>`
+  z-index: 5;
   width: 200px;
   padding: ${({ $mobile }) => ($mobile ? '16px' : '64px 16px')};
   position: -webkit-sticky;
