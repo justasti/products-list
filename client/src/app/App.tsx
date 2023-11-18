@@ -14,6 +14,7 @@ const App = () => {
       path: '/',
       element: <Homepage />,
       children: [
+        { path: '', element: <Navigate to='/products' /> },
         {
           path: 'products',
           children: [

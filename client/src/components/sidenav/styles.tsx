@@ -7,7 +7,7 @@ interface NavProps {
 export const StyledNavbar = styled.nav<NavProps>`
   z-index: 5;
   width: 200px;
-  padding: ${({ $mobile }) => ($mobile ? '16px' : '64px 16px')};
+  padding: 64px 16px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -25,15 +25,15 @@ export const StyledNavbar = styled.nav<NavProps>`
   li {
     list-style-type: none;
   }
-  .category-title {
+  a {
+    color: inherit;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
     display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 16px;
-    cursor: pointer;
-    transition: 0.5s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+    gap: 16px;
+    &.active,
     &:hover {
-      color: #0e8388;
+      color: #e2aa28;
     }
   }
   .hidden {
@@ -51,16 +51,17 @@ export const StyledNavbar = styled.nav<NavProps>`
     flex-direction: row;
     display: flex;
     align-items: center;
+    padding: 16px;
 
     ul {
       flex: 1;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
-    }
-
-    .category-title {
-      margin: 0;
+      li {
+        display: flex;
+        align-items: center;
+      }
     }
   }
 `
