@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { ValidationError } from '../../state/models'
 import { selectProducts, selectProductsStateError } from '../../state/products/selectors'
 import { createProduct, getProducts } from '../../state/products/thunks'
+import { Button } from '../UI/button'
 import { ErrorMessage } from '../UI/error-message'
 import { SuccessMessage } from '../UI/success-message'
 
@@ -69,7 +70,7 @@ export const NewProductForm = () => {
           <input ref={productInputRef} type='text' name='product' id='product' />
         </div>
         <div>
-          <input disabled={isButtonDisabled} type='submit' value='Create' />
+          <Button disabled={isButtonDisabled}>Create</Button>
         </div>
       </form>
       {showCreationMessage && isProductCreated && <SuccessMessage>Product successfully created.</SuccessMessage>}

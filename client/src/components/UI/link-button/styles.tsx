@@ -14,7 +14,7 @@ export const StyledLink = styled(Link)`
   background-color: #fff;
   transition: all 0.2s ease-in-out;
   &:hover,
-  &:active {
+  &:focus {
     background-color: #444;
     color: #fff;
   }
