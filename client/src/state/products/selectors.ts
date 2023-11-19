@@ -10,3 +10,4 @@ export const selectIsProductsLoading = createSelector(
   selectProductsState,
   (state) => state.loading
 )
+export const selectProductsStateError = createSelector(selectProductsState, (state) => state.error)

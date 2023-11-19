@@ -16,12 +16,15 @@ router.post('/', validateSchema(productValidation), async (req, res) => {
       name: req.body.name,
     }
 
+    const duplicateProduct = await Product.findOne({ name: product.name })
+    if (duplicateProduct) {
+      return res.status(409).json({ error: 'Product already exists' })
+    }
+
     await Product.create(product)
     res.status(201).json(product)
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: 'Could not create product', message: error.message })
+    res.status(500).json({ error: 'Could not create product', message: error.message })
   }
 })
 

@@ -31,7 +31,11 @@ export interface GetMealByIdPayload {
   id: string
 }
 
-export interface RejectedActionPayload {
-  data: { error: string }
+export interface ValidationError {
+  msg: string
+}
+
+export interface ErrorPayload {
+  data: { error: string | ValidationError[] }
   status: number
 }

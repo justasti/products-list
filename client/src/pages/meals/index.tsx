@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
+import { StyledLink } from '../../components/UI/link-button/styles'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { selectIsMealsLoading, selectMeals } from '../../state/meals/selectors'
 import { getMeals } from '../../state/meals/thunks'
@@ -27,7 +28,7 @@ export const Meals = () => {
             </div>
           ))}
       </div>
-      <Link to='/meals/new'>Add new meal</Link>
+      <StyledLink to='/meals/new'>Add new meal</StyledLink>
     </>
   )
 }
