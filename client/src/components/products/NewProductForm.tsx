@@ -24,20 +24,26 @@ export const NewProductForm = () => {
     e.preventDefault()
     setIsButtonDisabled(true)
     setIsProductCreated(false)
+    setShowCreationMessage(false)
     const newProduct = {
       name: productInputRef.current.value,
       id: nanoid(),
     }
+    let timeOut: ReturnType<typeof setTimeout>
+
     try {
-      setShowCreationMessage(true)
+      if (timeOut) clearTimeout(timeOut)
       const res = await dispatch(createProduct(newProduct))
+
       if (res.meta.requestStatus !== 'rejected') {
         productInputRef.current.value = null
         setIsProductCreated(true)
       }
+      setShowCreationMessage(true)
     } finally {
       setIsButtonDisabled(false)
-      setTimeout(() => {
+
+      timeOut = setTimeout(() => {
         setShowCreationMessage(false)
       }, 6000)
     }

@@ -5,7 +5,7 @@ export const SuccessMessageContainer = styled.div`
   align-items: center;
   gap: 16px;
   padding: 8px;
-  background-color: #91cd7a;
+  background-color: #b3fad1;
   margin-block: 16px;
   max-width: 400px;
 `
