@@ -1,7 +1,13 @@
-import { useAppSelector } from '../../state/hooks'
+import { ContentCopy, DeleteOutline } from '@mui/icons-material'
+import { Button } from '../../components/UI/button'
+import { ShoppingListItem } from '../../components/shopping-list/shopping-list-item'
+import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { selectShoppingCart } from '../../state/shopping-cart/selectors'
+import { decreaseAmount, increaseAmount, removeFromCart, resetCart } from '../../state/shopping-cart/slice'
+import { ButtonsContainer } from './styles'
 
 export const ShoppingCart = () => {
+  const dispatch = useAppDispatch()
   const shoppingCartItems = useAppSelector(selectShoppingCart)
 
   const copyToClipboard = () => {
@@ -13,12 +19,27 @@ export const ShoppingCart = () => {
 
   return (
     <>
-      {shoppingCartItems.map((item) => (
-        <div key={item.id}>
-          {item.name} - {item.amount}
-        </div>
-      ))}
-      <button onClick={copyToClipboard}>Copy to clipboard</button>
+      <ul>
+        {shoppingCartItems.map((item) => (
+          <ShoppingListItem
+            item={item}
+            key={item.id}
+            onRemove={(id) => dispatch(removeFromCart(id))}
+            onDecrease={(id) => dispatch(decreaseAmount(id))}
+            onIncrease={(id) => dispatch(increaseAmount(id))}
+          />
+        ))}
+      </ul>
+      <ButtonsContainer>
+        <Button onClick={copyToClipboard}>
+          <ContentCopy fontSize='small' />
+          Copy to clipboard
+        </Button>
+        <Button onClick={() => dispatch(resetCart())}>
+          <DeleteOutline fontSize='small' />
+          Clear Cart
+        </Button>
+      </ButtonsContainer>
     </>
   )
 }

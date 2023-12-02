@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const StyledButton = styled.button<{ disabled: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-decoration: none;
   color: inherit;
   font-size: 0.8rem;
@@ -8,7 +12,6 @@ export const StyledButton = styled.button<{ disabled: boolean }>`
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 32px;
-  display: inline-block;
   padding: 12px 16px;
   background-color: #fff;
   transition: all 0.2s ease-in-out;
@@ -16,8 +19,7 @@ export const StyledButton = styled.button<{ disabled: boolean }>`
   overflow: hidden;
   animation: ${({ disabled }) => (disabled ? 'pulse 1.5s ease infinite alternate' : 'none')};
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #444;
     color: ${({ disabled }) => (disabled ? '#444' : '#fff')};
   }
