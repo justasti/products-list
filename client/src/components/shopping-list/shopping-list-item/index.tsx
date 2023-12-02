@@ -14,13 +14,13 @@ export const ShoppingListItem: FC<Props> = ({ item, onDecrease, onIncrease, onRe
   return (
     <StyledListItem>
       <div>
-        <HighlightOff onClick={() => onRemove(item.id)} />
+        <HighlightOff cursor='pointer' onClick={() => onRemove(item.id)} />
         <p>{item.name}</p>
       </div>
       <div>
-        <RemoveCircleOutline onClick={() => onDecrease(item.id)} />
+        <RemoveCircleOutline cursor='pointer' onClick={() => onDecrease(item.id)} />
         <p>{item.amount}</p>
-        <AddCircleOutline onClick={() => onIncrease(item.id)} />
+        <AddCircleOutline cursor='pointer' onClick={() => onIncrease(item.id)} />
       </div>
     </StyledListItem>
   )

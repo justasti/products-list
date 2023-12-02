@@ -29,7 +29,7 @@ export const shoppingCartSlice = createSlice({
     },
     decreaseAmount: (state, action: PayloadAction<string>) => {
       const product = state.products.find((product) => product.id === action.payload)
-      if (product) product.amount = Number(product.amount) - 1
+      if (product && product.amount !== 1) product.amount = Number(product.amount) - 1
     },
     resetCart: (state) => {
       state.products = []

@@ -20,7 +20,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (isAddButtonClicked) {
-      dispatch(addToCart({ ...product, amount: productAmountRef.current.valueAsNumber }))
+      dispatch(addToCart({ ...product, amount: productAmountRef.current.valueAsNumber || 1 }))
       setIsAddButtonClicked(false)
       productAmountRef.current.blur()
     } else {
@@ -54,7 +54,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
         <input
           type='number'
           ref={productAmountRef}
-          defaultValue={1}
+          defaultValue={undefined}
           onChange={(e) => {
             productAmountRef.current.value = e.target.value
           }}
