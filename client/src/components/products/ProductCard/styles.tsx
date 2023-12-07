@@ -10,10 +10,10 @@ export const StyledProductCard = styled.div<{ $isInputHidden: boolean }>`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  border-bottom: 4px solid #e2aa28;
+  border-bottom: 4px solid #26d4c4;
   padding: 12px;
   isolation: isolate;
-  h2 {
+  h3 {
     font-size: 1.2rem;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -34,11 +34,11 @@ export const StyledProductCard = styled.div<{ $isInputHidden: boolean }>`
       width: ${({ $isInputHidden: isInputHidden }) => (isInputHidden ? '0' : '40%')};
       transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
       padding: 2px 4px;
-      border: 2px solid #e2aa28;
+      border: 2px solid #26d4c4;
       border-radius: 4px;
       &:focus {
         outline: none;
-        border-color: #f0b040;
+        border-color: #26d4c4;
       }
     }
   }
@@ -49,7 +49,7 @@ export const StyledProductCard = styled.div<{ $isInputHidden: boolean }>`
     align-self: flex-end;
     width: 36px;
     aspect-ratio: 1;
-    border: 2px solid #e2aa28;
+    border: 2px solid #26d4c4;
     background-color: #fff;
     border-radius: 50%;
     cursor: pointer;
@@ -59,7 +59,7 @@ export const StyledProductCard = styled.div<{ $isInputHidden: boolean }>`
       transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     &:hover,
     &:focus {
-      background-color: #f0b040;
+      background-color: #26d4c4;
     }
   }
 `

@@ -8,6 +8,7 @@ import { Meal, Product, ProductWithAmount } from '../../state/models'
 import { selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
 import { LoadingSpinner } from '../LoadingSpinner'
+import { Heading } from '../heading'
 
 type SelectOptionType = { label: string; value: string }
 
@@ -88,7 +89,7 @@ export const NewMealForm = () => {
   if (isProductsSelected) {
     return (
       <>
-        <h1>Create a new meal</h1>
+        <Heading level={1}>Create a new meal</Heading>
         <form onSubmit={handleSubmit}>
           {mealProducts.map((product) => (
             <div key={product.id}>
@@ -104,7 +105,7 @@ export const NewMealForm = () => {
 
   return (
     <>
-      <h1>Create a new meal</h1>
+      <Heading level={1}>Create a new meal</Heading>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='meal'>Meal name:</label>

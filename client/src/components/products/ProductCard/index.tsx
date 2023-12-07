@@ -49,7 +49,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
 
   return (
     <StyledProductCard $isInputHidden={!isAddButtonClicked} ref={cardRef}>
-      <h2>{product.name}</h2>
+      <h3>{product.name}</h3>
       <form className='add-to-cart' onSubmit={handleSubmit}>
         <input
           type='number'

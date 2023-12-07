@@ -33,7 +33,7 @@ export const StyledNavbar = styled.nav<NavProps>`
     gap: 16px;
     &.active,
     &:hover {
-      color: #e2aa28;
+      color: #26d4c4;
     }
   }
   .hidden {
@@ -42,7 +42,8 @@ export const StyledNavbar = styled.nav<NavProps>`
 
   @media only screen and (max-width: 600px) {
     border-right: unset;
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc; */
+    background-color: #e5e5e5;
     position: fixed;
     top: 100dvh;
     transform: translateY(-100%);

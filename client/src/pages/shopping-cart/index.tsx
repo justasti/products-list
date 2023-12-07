@@ -1,5 +1,6 @@
 import { ContentCopy, DeleteOutline } from '@mui/icons-material'
 import { Button } from '../../components/UI/button'
+import { Heading } from '../../components/heading'
 import { ShoppingListItem } from '../../components/shopping-list/shopping-list-item'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { selectShoppingCart } from '../../state/shopping-cart/selectors'
@@ -19,6 +20,7 @@ export const ShoppingCart = () => {
 
   return (
     <>
+      <Heading level={1}>Shopping list</Heading>
       <ul>
         {shoppingCartItems.map((item) => (
           <ShoppingListItem

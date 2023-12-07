@@ -7,6 +7,7 @@ import { createProduct, getProducts } from '../../state/products/thunks'
 import { Button } from '../UI/button'
 import { ErrorMessage } from '../UI/error-message'
 import { SuccessMessage } from '../UI/success-message'
+import { Heading } from '../heading'
 
 export const NewProductForm = () => {
   const products = useAppSelector(selectProducts)
@@ -64,6 +65,7 @@ export const NewProductForm = () => {
 
   return (
     <>
+      <Heading level={1}>Create a new product</Heading>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='product'>Product name:</label>

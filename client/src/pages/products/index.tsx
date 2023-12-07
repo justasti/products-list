@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { LinkButton } from '../../components/UI/link-button'
+import { Heading } from '../../components/heading'
 import { ProductCard } from '../../components/products/ProductCard'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { Product } from '../../state/models'
@@ -22,11 +23,12 @@ export const Products = () => {
 
   return (
     <Wrapper>
+      <Heading level={1}>Products List</Heading>
       <ProductsContainer>
         {products.length ? (
           products.map((product: Product) => <ProductCard key={product.id} product={product} />)
         ) : (
-          <h1>No products added yet</h1>
+          <Heading level={2}>No products added yet</Heading>
         )}
       </ProductsContainer>
       <LinkButton link='/products/new' text='Add new product' />
