@@ -11,6 +11,6 @@ export const StyledHeader = styled.div`
   justify-content: center;
   margin-bottom: 24px;
   img {
-    height: 70px;
+    height: 50px;
   }
 `

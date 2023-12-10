@@ -16,7 +16,13 @@ export const ShoppingCart = () => {
     navigator.clipboard.writeText(parsedList)
   }
 
-  if (!shoppingCartItems.length) return <h1>Shopping cart is empty!</h1>
+  if (!shoppingCartItems.length)
+    return (
+      <>
+        <Heading level={1}>Shopping list</Heading>
+        <Heading level={2}>Shopping cart is empty!</Heading>
+      </>
+    )
 
   return (
     <>
