@@ -1,6 +1,7 @@
 export interface Product {
   id: string
   name: string
+  categories: string[]
 }
 
 export interface Meal {
@@ -13,6 +14,7 @@ export interface ProductWithAmount {
   id: string
   name: string
   amount: number
+  categories: string[]
 }
 
 export interface ProductApiResponse extends Omit<Product, 'id'> {

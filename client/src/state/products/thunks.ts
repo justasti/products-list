@@ -8,8 +8,8 @@ export const getProducts = createAsyncThunk<Product[], void, ThunkApi<string | {
   `${productsSliceName}/getProducts`,
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const meals = await dispatch(productsApi.endpoints.getProducts.initiate()).unwrap()
-      return meals
+      const products = await dispatch(productsApi.endpoints.getProducts.initiate()).unwrap()
+      return products
     } catch (error) {
       return rejectWithValue(error)
     }

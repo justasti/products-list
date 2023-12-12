@@ -6,10 +6,11 @@ import { createProduct, getProducts } from './thunks'
 
 export interface ProductsState {
   products: Product[]
+  productsCategories: string[]
   loading: boolean
   error: ErrorPayload
   isProductsFilterOpen: boolean
-  filteredProducts: Product[]
+  filteredCategories: string[]
 }
 
 const initialState: ProductsState = {
@@ -19,10 +20,11 @@ const initialState: ProductsState = {
     // { id: 'KZYdKbrwZhAcdpyZUGOzb', name: 'Dešra' },
     // { id: 'lfAdnAPVtkm2o8lFIRpZT', name: 'Kiaušinis' },
   ],
+  productsCategories: [],
   loading: false,
   error: null,
   isProductsFilterOpen: false,
-  filteredProducts: [],
+  filteredCategories: [],
 }
 
 export const productsSlice = createSlice({
@@ -35,13 +37,20 @@ export const productsSlice = createSlice({
     closeProductsFilter: (state) => {
       state.isProductsFilterOpen = false
     },
+    setFilteredCategories: (state, action) => {
+      state.filteredCategories = action.payload
+      state.isProductsFilterOpen = false
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {
       state.loading = true
     }),
       builder.addCase(getProducts.fulfilled, (state, action) => {
-        state.products = action.payload
+        const products = action.payload
+        state.products = products
+        const categories = products.map((product) => product.categories).flat()
+        state.productsCategories = [...new Set(categories)].sort()
         state.loading = false
       }),
       builder.addCase(getProducts.rejected, (state) => {
@@ -60,6 +69,7 @@ export const productsSlice = createSlice({
             state.products.push({
               name: product.name,
               id: product.id,
+              categories: product.categories,
             })
           }
         }
@@ -67,4 +77,4 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { openProductsFilter, closeProductsFilter } = productsSlice.actions
+export const { openProductsFilter, closeProductsFilter, setFilteredCategories } = productsSlice.actions

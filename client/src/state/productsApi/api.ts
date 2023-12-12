@@ -13,7 +13,7 @@ export const productsApi = createApi({
       }),
       transformResponse: (products: ProductApiResponse[]) =>
         products
-          .map((product) => ({ id: product._id, name: product.name }))
+          .map((product) => ({ id: product._id, name: product.name, categories: product.categories }))
           .sort((a, b) => a.name.localeCompare(b.name)),
     }),
     createProduct: builder.mutation<void, Product>({
