@@ -29,6 +29,7 @@ export const NewProductForm = () => {
     setShowCreationMessage(false)
     const newProduct = {
       name: productInputRef.current.value,
+      categories: ['uncategorized'],
       id: nanoid(),
     }
     let timeOut: ReturnType<typeof setTimeout>

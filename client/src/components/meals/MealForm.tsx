@@ -31,9 +31,15 @@ export const NewMealForm = () => {
 
   const handleChange = (_, meta: ActionMeta<SelectOptionType>) => {
     if (meta.action === 'create-option') {
-      setMealProducts((current) => [...current, { id: nanoid(), name: meta.option.label }])
+      setMealProducts((current) => [
+        ...current,
+        { id: nanoid(), name: meta.option.label, categories: ['uncategorized'] },
+      ])
     } else if (meta.action === 'select-option') {
-      setMealProducts((current) => [...current, { id: meta.option.value, name: meta.option.label }])
+      setMealProducts((current) => [
+        ...current,
+        { id: meta.option.value, name: meta.option.label, categories: ['uncategorized'] },
+      ])
     } else if (meta.action === 'clear') {
       setMealProducts([])
     } else {
