@@ -42,7 +42,6 @@ export const StyledNavbar = styled.nav<NavProps>`
 
   @media only screen and (max-width: 600px) {
     border-right: unset;
-    /* border-top: 1px solid #ccc; */
     background-color: #e5e5e5;
     position: fixed;
     top: 100dvh;

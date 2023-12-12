@@ -3,7 +3,7 @@ import { StyledButton } from './styles'
 
 interface Props {
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Button: FC<PropsWithChildren<Props>> = ({ children, disabled, onClick }) => {

@@ -11,3 +11,5 @@ export const selectIsProductsLoading = createSelector(
   (state) => state.loading
 )
 export const selectProductsStateError = createSelector(selectProductsState, (state) => state.error)
+
+export const selectIsProductsFilterOpen = createSelector(selectProductsState, (state) => state.isProductsFilterOpen)

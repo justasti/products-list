@@ -1,17 +1,20 @@
 import { useEffect } from 'react'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { LinkButton } from '../../components/UI/link-button'
+import { FilterButton } from '../../components/filter-button'
+import { Filters } from '../../components/filters'
 import { Heading } from '../../components/heading'
 import { ProductCard } from '../../components/products/ProductCard'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { Product } from '../../state/models'
-import { selectIsProductsLoading, selectProducts } from '../../state/products/selectors'
+import { selectIsProductsFilterOpen, selectIsProductsLoading, selectProducts } from '../../state/products/selectors'
 import { getProducts } from '../../state/products/thunks'
 import { ProductsContainer, Wrapper } from './styles'
 
 export const Products = () => {
   const products = useAppSelector(selectProducts)
   const isProductsLoading = useAppSelector(selectIsProductsLoading)
+  const isProductsFilterOpen = useAppSelector(selectIsProductsFilterOpen)
 
   const dispatch = useAppDispatch()
 
@@ -32,6 +35,8 @@ export const Products = () => {
         )}
       </ProductsContainer>
       <LinkButton link='/products/new' text='Add new product' />
+      <FilterButton />
+      {isProductsFilterOpen && <Filters />}
     </Wrapper>
   )
 }

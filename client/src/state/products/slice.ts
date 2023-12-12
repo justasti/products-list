@@ -8,6 +8,8 @@ export interface ProductsState {
   products: Product[]
   loading: boolean
   error: ErrorPayload
+  isProductsFilterOpen: boolean
+  filteredProducts: Product[]
 }
 
 const initialState: ProductsState = {
@@ -19,12 +21,21 @@ const initialState: ProductsState = {
   ],
   loading: false,
   error: null,
+  isProductsFilterOpen: false,
+  filteredProducts: [],
 }
 
 export const productsSlice = createSlice({
   name: productsSliceName,
   initialState,
-  reducers: {},
+  reducers: {
+    openProductsFilter: (state) => {
+      state.isProductsFilterOpen = true
+    },
+    closeProductsFilter: (state) => {
+      state.isProductsFilterOpen = false
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {
       state.loading = true
@@ -55,3 +66,5 @@ export const productsSlice = createSlice({
       })
   },
 })
+
+export const { openProductsFilter, closeProductsFilter } = productsSlice.actions
