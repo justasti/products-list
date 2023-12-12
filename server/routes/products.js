@@ -14,6 +14,7 @@ router.post('/', validateSchema(productValidation), async (req, res) => {
     const product = {
       _id: req.body.id,
       name: req.body.name,
+      categories: req.body.categories,
     }
 
     const duplicateProduct = await Product.findOne({ name: product.name })
