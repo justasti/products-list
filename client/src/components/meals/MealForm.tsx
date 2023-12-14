@@ -10,7 +10,7 @@ import { getProducts } from '../../state/products/thunks'
 import { LoadingSpinner } from '../LoadingSpinner'
 import { Heading } from '../heading'
 
-type SelectOptionType = { label: string; value: string }
+export type SelectOptionType = { label: string; value: string }
 
 export const NewMealForm = () => {
   const dispatch = useAppDispatch()

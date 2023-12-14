@@ -1,22 +1,29 @@
 import { nanoid } from '@reduxjs/toolkit'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
+import { ActionMeta } from 'react-select'
+import CreatableSelect from 'react-select/creatable'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { ValidationError } from '../../state/models'
-import { selectProducts, selectProductsStateError } from '../../state/products/selectors'
+import { selectProducts, selectProductsCategories, selectProductsStateError } from '../../state/products/selectors'
 import { createProduct, getProducts } from '../../state/products/thunks'
 import { Button } from '../UI/button'
 import { ErrorMessage } from '../UI/error-message'
 import { SuccessMessage } from '../UI/success-message'
 import { Heading } from '../heading'
+import { SelectOptionType } from '../meals/MealForm'
 
 export const NewProductForm = () => {
   const products = useAppSelector(selectProducts)
   const productsStateError = useAppSelector(selectProductsStateError)
+  const productsCategories = useAppSelector(selectProductsCategories)
   const productInputRef = useRef<HTMLInputElement>(null)
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const [selectedCategories, setSelectedCategories] = useState([])
   const [isProductCreated, setIsProductCreated] = useState(false)
   const [showCreationMessage, setShowCreationMessage] = useState(false)
   const dispatch = useAppDispatch()
+
+  const productsCategoriesOptions = productsCategories.map((category) => ({ value: category, label: category }))
 
   useEffect(() => {
     if (!products.length) dispatch(getProducts())
@@ -29,7 +36,7 @@ export const NewProductForm = () => {
     setShowCreationMessage(false)
     const newProduct = {
       name: productInputRef.current.value,
-      categories: ['uncategorized'],
+      categories: selectedCategories,
       id: nanoid(),
     }
     let timeOut: ReturnType<typeof setTimeout>
@@ -64,6 +71,16 @@ export const NewProductForm = () => {
     }
   }
 
+  const handleSelectChange = (_, meta: ActionMeta<SelectOptionType>) => {
+    if (meta.action === 'create-option' || meta.action === 'select-option') {
+      setSelectedCategories((current) => [...current, meta.option.label])
+    } else if (meta.action === 'clear') {
+      setSelectedCategories([])
+    } else {
+      setSelectedCategories((current) => current.filter((category) => category !== meta.removedValue.label))
+    }
+  }
+
   return (
     <>
       <Heading level={1}>Create a new product</Heading>
@@ -72,6 +89,7 @@ export const NewProductForm = () => {
           <label htmlFor='product'>Product name:</label>
           <input ref={productInputRef} type='text' name='product' id='product' />
         </div>
+        <CreatableSelect isMulti options={productsCategoriesOptions} onChange={handleSelectChange}></CreatableSelect>
         <div>
           <Button disabled={isButtonDisabled}>Create</Button>
         </div>
