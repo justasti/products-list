@@ -58,6 +58,11 @@ export const productsSlice = createSlice({
       }),
       builder.addCase(createProduct.fulfilled, (state, action) => {
         state.products.push(action.meta.arg)
+        action.meta.arg.categories.forEach((category) => {
+          if (!state.productsCategories.includes(category)) {
+            state.productsCategories.push(category)
+          }
+        })
         state.error = null
       }),
       builder.addCase(createProduct.rejected, (state, action) => {
